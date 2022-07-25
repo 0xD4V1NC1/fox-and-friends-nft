@@ -1,5 +1,5 @@
 {   
-    "PROJECT_NAME": "wolfpack-finance-nft",
+    "PROJECT_NAME": "fox-and-friends",
     "NETWORKS": {
         "1": {
             "name": "Ethereum Mainnet",
@@ -12,18 +12,6 @@
             "isTestnet": true,
             "explorerURL": "https://rinkeby.etherscan.io",
             "openseaURL": "https://testnets.opensea.io"
-        },
-        "80001": {
-            "name": "Mumbai Testnet",
-            "isTestnet": true,
-            "explorerURL": "https://mumbai.polygonscan.com",
-            "openseaURL": "https://testnets.opensea.io"
-        },
-        "137": {
-            "name": "Polygon Mainnet",
-            "isTestnet": false,
-            "explorerURL": "https://polygonscan.com",
-            "openseaURL": "https://opensea.io"
         },
         "31337": {
             "name": "Localhost",

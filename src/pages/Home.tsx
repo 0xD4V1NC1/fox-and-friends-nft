@@ -6,13 +6,10 @@ import {useGlobalContext} from '../providers/GlobalContext';
 import useNftData from '../hooks/useNftData';
 
 import Layout from '../components/Layout/Layout';
-import Divider from '../components/UI/Divider';
 import Marquee from '../components/UI/Marquee';
 import MintSection from '../components/PageComponents/Home/MintSection';
-import OpenseaBannerSection from '../components/PageComponents/Home/OpenseaBannerSection';
 import SoldOutSection from '../components/PageComponents/Home/SoldOutSection';
 import IntroSection from '../components/PageComponents/Home/IntroSection';
-import FaqsSection from '../components/PageComponents/Home/FaqsSection';
 import {useNftOwnerContext} from '../providers/NftOwnerContext';
 
 const Home = () => {
@@ -48,13 +45,6 @@ const Home = () => {
       <IntroSection handleScrollToMintSection={handleScrollToMintSection} isSoldOut={isSoldOut} />
       {isSoldOut ? <SoldOutSection /> : <MintSection mintSectionRef={mintSectionRef} nftCost={nftCost} isAccountConnected={isActive} maxAmount={maxNftSupply} currentNftId={currentNftId} availableMints={availableMints} />}
       <Marquee marqueeText="Minting July 23 ·" />
-      <FaqsSection />
-      {isSoldOut ? (
-        <>
-          <Divider horizontal />
-          <OpenseaBannerSection />
-        </>
-      ): null }
     </Layout>
   );
 };

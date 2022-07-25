@@ -20,10 +20,7 @@ const Footer = () => {
         <div className=''>
           <h2 className='font-semibold'> LEARN MORE </h2>
           <ul className='my-4'>
-            <li><LinkTo to='/members-only'>Members Only</LinkTo></li>
             <li><LinkTo to={`${BASE_URL}/#mint-section`}>Minting Information</LinkTo></li>
-            <li><LinkTo to={`${BASE_URL}/#faqs-section`}>FAQs</LinkTo></li>
-            <li><LinkTo to="/terms-of-service">Terms Of Service</LinkTo></li>
           </ul>
         </div>
         {/* Section 2 */}

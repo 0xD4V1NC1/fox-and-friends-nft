@@ -12,14 +12,6 @@ const nav = {
           id: uuidv4(),
           ariaLabel: 'Link to Home Page',
         },
-        {
-          label: 'Members Only',
-          icon: 'user-group',
-          href: '/members-only',
-          id: uuidv4(),
-          ariaLabel: 'Link to Members Only Page',
-
-        },
       ],
     },
   },

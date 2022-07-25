@@ -10,7 +10,7 @@ export const handleMint = async (mintAmount:number, provider: any, nftCost:numbe
       await contract.mint(mintAmount, {
         value: ethers.utils.parseEther((nftCostNum * mintAmount).toString()),
       });
-      addToast({toastType: 'success', toastHeader: 'Mint Successful!', toastMessage: `Navigate to the Members Only page or Opensea to see your NFT`});
+      addToast({toastType: 'success', toastHeader: 'Mint Successful!', toastMessage: `Go to opensea to see your NFT`});
     } catch (error) {
       if (error instanceof Error) {
         const errorMessage = {...error};
