@@ -46,12 +46,8 @@ const config: HardhatUserConfig = {
       url: process.env.REACT_APP_ROPSTEN_URL || '',
       accounts: process.env.REACT_APP_PRIVATE_KEY !== undefined ? [process.env.REACT_APP_PRIVATE_KEY] : [],
     },
-    mumbai: {
-      url: `https://matic-mumbai.chainstacklabs.com`,
-      accounts: process.env.REACT_APP_PRIVATE_KEY !== undefined ? [process.env.REACT_APP_PRIVATE_KEY] : [],
-    },
-    matic: {
-      url: `https://polygon-rpc.com/`,
+    ethereum: {
+      url: process.env.REACT_APP_ETHEREUM_URL || '',
       accounts: process.env.REACT_APP_PRIVATE_KEY !== undefined ? [process.env.REACT_APP_PRIVATE_KEY] : [],
     },
   },

@@ -1,12 +1,12 @@
 // @TODO You will need to update this based on your NFT .json file name... This will likely cause error if it doesn't exist
-import nftData from '../0xWF.json';
+import nftData from '../fox-and-friends.json';
 import {ethers} from 'ethers';
 
 // NFT Mint date in milliseconds for the countdown timer
 export const NFT_MINT_DATE = new Date(process.env.REACT_APP_NFT_MINT_DATE || '').getTime();
-export const POLYGON_CHAIN_ID = 137;
+export const ETHEREUM_CHAIN_ID = 1;
+export const ROPSTEN_CHAIN_ID = 3;
 export const LOCALHOST_CHAIN_ID = 31337;
-export const POLYGON_MUMBAI_CHAIN_ID = 80001;
 /*
     if developing locally, let the contract address equal the address generated in the <NFT>.json file...
     otherwise our production address
@@ -18,10 +18,10 @@ const getNftAddress = () => {
   let nftAddress;
   switch (environment) {
     case 'production':
-      nftAddress = '0x780DbFf167629425E60404F02961F521E507A1e2';
+      nftAddress = '';
       break;
     case 'test':
-      nftAddress = '0xE665B21fE7Adc6E96C59fB96BF3C3a82CE14C060';
+      nftAddress = '';
       break;
     case 'development':
     default:
@@ -66,10 +66,10 @@ const getChainId = () => {
   let chainId;
   switch (environment) {
     case 'test':
-      chainId = POLYGON_MUMBAI_CHAIN_ID;
+      chainId = ROPSTEN_CHAIN_ID;
       break;
     case 'production':
-      chainId = POLYGON_CHAIN_ID;
+      chainId = ETHEREUM_CHAIN_ID;
       break;
     case 'development':
     default:
