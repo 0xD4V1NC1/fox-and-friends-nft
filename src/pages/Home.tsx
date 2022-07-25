@@ -41,7 +41,7 @@ const Home = () => {
 
   return (
     <Layout>
-      <Marquee marqueeText="Minting July 23 ·" reverse />
+      <Marquee marqueeText="Minting August 1st ·" reverse />
       <IntroSection handleScrollToMintSection={handleScrollToMintSection} isSoldOut={isSoldOut} />
       {isSoldOut ? <SoldOutSection /> : <MintSection mintSectionRef={mintSectionRef} nftCost={nftCost} isAccountConnected={isActive} maxAmount={maxNftSupply} currentNftId={currentNftId} availableMints={availableMints} />}
     </Layout>

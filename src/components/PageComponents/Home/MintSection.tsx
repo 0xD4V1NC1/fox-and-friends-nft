@@ -87,7 +87,7 @@ const MintSection = ({
     >
       <div className="flex flex-col justify-center md:flex-row md:items-end sm:gap-24 lg:gap-36 w-full">
         <div className="flex flex-col">
-          <h2 className="mb-12 text-8xl md:text-6xl lg:text-8xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500">
+          <h2 className="mb-12 text-6xl lg:text-8xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500">
             Fox and Friends
           </h2>
           <Image
