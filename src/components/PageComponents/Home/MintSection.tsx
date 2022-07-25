@@ -109,7 +109,7 @@ const MintSection = ({
           <div className="relative w-full overflow-hidden rounded-3xl bg-[#f5f5f5] dark:bg-primary-dark-400 text-black dark:text-white p-6 py-12 mt-12">
             {isAccountConnected ? (
               <div className="h-48 flex flex-col justify-center items-center">
-                <h3 className='mb-4 text-3xl font-semibold'>Mint Cost: {formattedTotalCost} Ξ</h3>
+                <h3 className='mb-4 text-2xl font-semibold'>Mint Cost: {formattedTotalCost} Ξ</h3>
                 <div className="flex justify-center items-center pb-4">
                   <Button
                     type="button"
