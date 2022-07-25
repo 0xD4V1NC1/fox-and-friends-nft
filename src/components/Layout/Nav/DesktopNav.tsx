@@ -11,7 +11,7 @@ const DesktopNav = () => {
       <LinkTo to="/" ariaLabel='Link to Home Page'>
         <div className='flex items-center hover:bg-primary-400 md:py-2 md:px-4'>
           <Logo formattedClassName='w-12 h-12' gradient gradientId='desktop-logo'/>
-          <h2 className='ml-4 font-semibold text-xl text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500'> 0xWolfpackFinance </h2>
+          <h2 className='ml-4 font-semibold text-xl text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500'> Fox and Friends </h2>
         </div>
       </LinkTo>
       <div className='mx-4 my-2 flex items-center'>

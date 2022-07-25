@@ -9,7 +9,7 @@ export type GlobalState = {
 };
 
 export const GlobalContext = createContext<GlobalState>({
-  pageTitle: '0xWF',
+  pageTitle: 'Fox And Friends',
   setPageTitle: () => {/* empty */},
   metaDescription: '',
   setMetaDescription: () => {/* empty */},

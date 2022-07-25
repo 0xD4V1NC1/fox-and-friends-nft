@@ -26,10 +26,10 @@ async function main() {
   // We get the contract to deploy
   console.log('Getting Contract...');
   console.log('------------------------------------------');
-  const WfNFT = await ethers.getContractFactory('WfNFT');
+  const FoxAndFriends = await ethers.getContractFactory('FoxAndFriends');
   console.log('Attempting to Deploy Contract...');
   console.log('------------------------------------------');
-  const wfNft = await WfNFT.deploy(
+  const foxandfriends = await FoxAndFriends.deploy(
       NAME,
       SYMBOL,
       MINT_COST,
@@ -40,18 +40,18 @@ async function main() {
       IPFS_HIDDEN_IMAGE_METADATA_URI,
   );
 
-  await wfNft.deployed();
-  console.log('NFT Smart Contract deployed to: ', wfNft.address);
-  const wfNftInterface = wfNft.interface.format('json');
+  await foxandfriends.deployed();
+  console.log('NFT Smart Contract deployed to: ', foxandfriends.address);
+  const foxandfriendsInterface = foxandfriends.interface.format('json');
 
   const contractData = {
-    address: wfNft.address,
-    abi: wfNftInterface,
+    address: foxandfriends.address,
+    abi: foxandfriendsInterface,
   };
 
   // helps determine our projects directory
   const base = process.cwd();
-  fs.writeFileSync(`${base}/src/${SYMBOL}.json`, JSON.stringify(contractData));
+  fs.writeFileSync(`${base}/src/fox-and-friends.json`, JSON.stringify(contractData));
 }
 
 // We recommend this pattern to be able to use async/await everywhere

@@ -27,8 +27,8 @@ const Home = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    setPageTitle('Home | 0xWF');
-    setMetaDescription('Home of 0xWF NFT. Mint your NFT here and learn more about our project');
+    setPageTitle('Home | Fox and Friends');
+    setMetaDescription('Home of Fox and Friends NFT. Mint your NFT here and learn more about our project');
     if (!isNftDataLoading && currentNftId >= maxNftSupply) {
       setIsSoldOut(true);
     }

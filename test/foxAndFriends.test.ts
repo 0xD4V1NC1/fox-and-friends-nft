@@ -1,7 +1,7 @@
 import {expect, assert} from 'chai';
 import {ethers} from 'hardhat';
 
-describe(`0xWF NFT Contract Functions:`, function() {
+describe(`FoxAndFriends NFT Contract Functions:`, function() {
   let NFT;
   let testNFT: any;
   let testNFT2: any; // deployed at a future date
@@ -39,8 +39,8 @@ describe(`0xWF NFT Contract Functions:`, function() {
   const mintCost = parseFloat(ethers.utils.formatEther(MINT_COST));
 
   before(async function() {
-    /* Get the ContractFactory and Signers here. @TODO `WfNFT` replace this with your contract name */
-    NFT = await ethers.getContractFactory(`WfNFT`);
+    /* Get the ContractFactory and Signers here*/
+    NFT = await ethers.getContractFactory(`FoxAndFriends`);
     [owner, addr1, addr2, addr3, addr4] = await ethers.getSigners();
     testNFT = await NFT.deploy(
         NAME,

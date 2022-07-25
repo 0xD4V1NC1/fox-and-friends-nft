@@ -38,20 +38,20 @@ const Footer = () => {
               <p className='text-sm'> Our Discord server is a great place to meet the team, chat with us and become part of an exciting and rapidly growing community </p>
             </div>
           </div>
-          <Button text="Join Our Discord" ariaLabel='Click to join 0xWF discord' color="primary" type="button" href="https://discord.gg/d272FRg2Xm" target='_blank' className='py-2 px-6 hover:animate-pulse' />
+          <Button text="Join Our Discord" ariaLabel='Click to join Fox and Friends discord' color="primary" type="button" href="" target='_blank' className='py-2 px-6 hover:animate-pulse' />
         </div>
         {/* Section 3 */}
         <Divider className='mx-8' vertical />
         <div className="mt-8 md:mt-0">
           <h2 className='font-semibold'> FOLLOW US </h2>
           <div className='flex mt-4 items-center'>
-            <LinkTo to="https://twitter.com/0xD4V1NC1" target="_blank">
+            <LinkTo to="https://twitter.com/" target="_blank">
               <Twitter formattedClassName='w-8 h-8 text-primary-500 hover:animate-pulse'/>
             </LinkTo>
             <h3 className='ml-4'>Twitter</h3>
           </div>
           <div className='flex mt-4 items-center'>
-            <LinkTo to="https://instagram.com/0xwolfpackfinance" target="_blank" >
+            <LinkTo to="https://instagram.com/" target="_blank" >
               <Instagram formattedClassName='w-8 h-8 text-primary-500 hover:animate-pulse'/>
             </LinkTo>
             <h3 className='ml-4'>Instagram</h3>
@@ -64,7 +64,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='mt-8 text-center text-gray-600 dark:text-gray-400 text-xs'>© 0xWF All rights reserved. Crafted by 0xD4V1NC1</div>
+      <div className='mt-8 text-center text-gray-600 dark:text-gray-400 text-xs'>© Fox and Friends All rights reserved</div>
     </footer>
   );
 };
