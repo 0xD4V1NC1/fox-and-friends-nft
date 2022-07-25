@@ -21,7 +21,8 @@ module.exports = {
       colors: {
         'primary': {
           400: '#B7B0FF',
-          500: '#53A0FD',
+          // 500: '#53A0FD',
+          500: '#b75800',
         },
         'primary-dark': {
           400: '#353839',
@@ -34,7 +35,7 @@ module.exports = {
           500: '#94bf45',
         },
         'gradient': {
-          color: `linear-gradient(90deg,#53A0FD, #C5FF5C,#B7B0FF,#53A0FD, #C5FF5C, #B7B0FF)`,
+          color: `linear-gradient(90deg,#53A0FD, #C5FF5C,#B7B0FF,#b75800, #C5FF5C, #B7B0FF)`,
         },
       },
       animation: {
