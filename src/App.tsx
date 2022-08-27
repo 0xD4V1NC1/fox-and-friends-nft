@@ -29,7 +29,7 @@ const App = () => {
       {/* @ts-ignore upgraded helmet types... waiting for react-helmet to upgrade... issue comes in with react 18 upgrade */}
       <Helmet>
         <title>{pageTitle}</title>
-        <meta name="description" content={`${metaDescription || 'Fox and Friends NFT project'}`} />
+        <meta name="description" content={`${metaDescription || 'Frenzy Fox Club NFT project'}`} />
       </Helmet>
 
       <GlobalContext.Provider value={{pageTitle, setPageTitle, metaDescription, setMetaDescription, account}}>

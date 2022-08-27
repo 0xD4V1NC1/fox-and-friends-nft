@@ -20,19 +20,24 @@ module.exports = {
     extend: {
       colors: {
         'primary': {
-          400: '#B7B0FF',
+          // 400: '#B7B0FF',
+          400: '#fcd9bd',
           // 500: '#53A0FD',
-          500: '#b75800',
+          // 500: '#b75800',
+          500: '#ff8a4c',
         },
         'primary-dark': {
-          400: '#353839',
+          // 400: '#353839',
+          400: '#fcd9bd',
           500: '#121212',
         },
         'secondary': {
-          500: '#C5FF5C',
+          // 500: '#C5FF5C',
+          500: '#b75800',
         },
         'secondary-dark': {
-          500: '#94bf45',
+          // 500: '#94bf45',
+          500: '#fcd9bd',
         },
         'gradient': {
           color: `linear-gradient(90deg,#53A0FD, #C5FF5C,#B7B0FF,#b75800, #C5FF5C, #B7B0FF)`,
@@ -103,11 +108,11 @@ module.exports = {
         '.bg-rainbow': {
           'backgroundSize': `400% 200%`,
           // 'backgroundImage': `linear-gradient(90deg,#32fe31,#33f7f5,#4779ed,#9263d2,#ff0b00,#9263d2,#4779ed,#33f7f5)`, rainbow gradient
-          'backgroundImage': `linear-gradient(90deg,#53A0FD, #C5FF5C,#B7B0FF,#53A0FD, #C5FF5C, #B7B0FF)`, // my custom gradient
+          'backgroundImage': `linear-gradient(90deg,#fcd9bd, #ff8a4c, #fcd9bd, #53A0FD, #fcd9bd)`, // my custom gradient
         },
         '.bg-rainbow-animate': {
           'backgroundSize': `400% 200%`,
-          'backgroundImage': `linear-gradient(90deg,#32fe31,#33f7f5,#4779ed,#9263d2,#ff0b00,#9263d2,#4779ed,#33f7f5)`,
+          'backgroundImage': `linear-gradient(90deg,#fcd9bd,#33f7f5,#4779ed,#9263d2,#ff0b00,#9263d2,#4779ed,#33f7f5)`,
           'animationName': `rainbow`,
           'animationDuration': `5s`,
           'animationIterationCount': `infinite`,

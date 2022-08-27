@@ -51,7 +51,7 @@ async function main() {
 
   // helps determine our projects directory
   const base = process.cwd();
-  fs.writeFileSync(`${base}/src/fox-and-friends.json`, JSON.stringify(contractData));
+  fs.writeFileSync(`${base}/src/frenzy-fox-club.json`, JSON.stringify(contractData));
 }
 
 // We recommend this pattern to be able to use async/await everywhere

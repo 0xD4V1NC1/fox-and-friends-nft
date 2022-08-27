@@ -12,7 +12,7 @@ const SoldOutSection = () => {
     <section className='min-h-screen bg-white dark:bg-primary-dark-500 px-16 py-8 m-auto'>
       <div className='flex flex-col justify-center md:flex-row md:items-end md:gap-48 w-full'>
         <div className='flex flex-col'>
-          <h2 className='mb-12 text-8xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500'>Fox and Friends</h2>
+          <h2 className='mb-12 text-8xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500'>Frenzy Fox Club</h2>
           <Image src='/preview.gif' size='w-full h-full md:w-72 md:h-72' marginBottom='mb-0' className='rounded-3xl'/>
         </div>
         <div className='w-full md:w-1/2'>

@@ -6,7 +6,7 @@ import Button from '../../UI/Button';
 import Image from '../../UI/Image';
 
 // use https://codechi.com/dev-tools/date-to-millisecond-calculators/ to calculate future date in milliseconds
-import {NFT_MINT_DATE} from '../../../consts/consts';
+// import {NFT_MINT_DATE} from '../../../consts/consts';
 
 import {handleMint} from '../../../utils/mintUtil';
 import {pluralize} from '../../../utils/formatUtil';
@@ -43,9 +43,6 @@ const MintSection = ({
   useEffect(() => {
     if (availableMints === 0) setMintAmount(0);
   }, [availableMints]);
-  const handleCountdownCompleted = () => {
-    setCountdownCompleted(true);
-  };
 
   const handleIncrement = () => {
     if (mintAmount >= availableMints) return;
@@ -88,7 +85,7 @@ const MintSection = ({
       <div className="flex flex-col justify-center md:flex-row md:items-end sm:gap-24 lg:gap-36 w-full">
         <div className="flex flex-col">
           <h2 className="mb-12 text-6xl lg:text-8xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500">
-            Fox and Friends
+            Frenzy Fox Club
           </h2>
           <Image
             src="/preview.gif"
@@ -99,11 +96,6 @@ const MintSection = ({
         </div>
         <div className="w-full md:w-1/2">
           <h2 className="mt-8 md:mt-0 flex flex-col text-center font-black text-4xl md:text-6xl lg:text-7xl dark:text-white overflow-hidden">
-            <Countdown
-              date={NFT_MINT_DATE}
-              ref={countdownRef}
-              onComplete={() => handleCountdownCompleted()}
-            />
             {isAccountConnected ? <span className="text-5xl text-primary-400"> {currentNftId} / {maxAmount} Minted </span> : null}
           </h2>
           <div className="relative w-full overflow-hidden rounded-3xl bg-[#f5f5f5] dark:bg-primary-dark-400 text-black dark:text-white p-6 py-12 mt-12">
@@ -160,7 +152,7 @@ const MintSection = ({
               <div className="h-36 md:h-48 flex justify-center items-center text-center">
                 <h3 className="text-4xl font-semibold">
                   {' '}
-                  Please Connect your wallet to Mint NFT
+                  Please connect your wallet to mint NFT
                 </h3>
               </div>
             )}

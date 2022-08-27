@@ -1,5 +1,5 @@
 // @TODO You will need to update this based on your NFT .json file name... This will likely cause error if it doesn't exist
-import nftData from '../fox-and-friends.json';
+import nftData from '../frenzy-fox-club.json';
 import {ethers} from 'ethers';
 
 // NFT Mint date in milliseconds for the countdown timer

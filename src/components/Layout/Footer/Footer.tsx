@@ -35,7 +35,7 @@ const Footer = () => {
               <p className='text-sm'> Our Discord server is a great place to meet the team, chat with us and become part of an exciting and rapidly growing community </p>
             </div>
           </div>
-          <Button text="Join Our Discord" ariaLabel='Click to join Fox and Friends discord' color="primary" type="button" href="" target='_blank' className='py-2 px-6 hover:animate-pulse' />
+          <Button text="Join Our Discord" ariaLabel='Click to join Frenzy Fox Club discord' color="primary" type="button" href="" target='_blank' className='py-2 px-6 hover:animate-pulse' />
         </div>
         {/* Section 3 */}
         <Divider className='mx-8' vertical />
@@ -61,7 +61,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className='mt-8 text-center text-gray-600 dark:text-gray-400 text-xs'>© Fox and Friends All rights reserved</div>
+      <div className='mt-8 text-center text-gray-600 dark:text-gray-400 text-xs'>© Frenzy Fox Club All rights reserved</div>
     </footer>
   );
 };
