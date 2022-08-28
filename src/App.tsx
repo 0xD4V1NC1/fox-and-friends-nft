@@ -35,7 +35,7 @@ const App = () => {
       <GlobalContext.Provider value={{pageTitle, setPageTitle, metaDescription, setMetaDescription, account}}>
         <NftOwnerContextProvider>
           <ToastProvider>
-            <div className="app">
+            <div className="app font-concertOne">
               <AppRoutes/>
             </div>
           </ToastProvider>

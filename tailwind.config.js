@@ -29,7 +29,7 @@ module.exports = {
         'primary-dark': {
           // 400: '#353839',
           400: '#fcd9bd',
-          500: '#121212',
+          500: '#000',
         },
         'secondary': {
           // 500: '#C5FF5C',
@@ -74,6 +74,9 @@ module.exports = {
       },
       flex: {
         '0-0-auto': '0 0 auto',
+      },
+      fontFamily: {
+        concertOne: ['ConcertOne', 'sans-serif'],
       },
     },
   },
