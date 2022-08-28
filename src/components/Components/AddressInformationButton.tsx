@@ -17,7 +17,7 @@ const AddressInformationButton = ({address, connector}: {address:string, connect
       {/* <div id='address-information-gradient-border' className='p-0.5 bg-gradient-to-br from-primary-400 via-primary-500 to-secondary-500 rounded hover:bg-rainbow hover:animate-rainbow' >
         <Button type='button' ariaLabel='Click to disconnect wallet' color='primary-gradient-outline' text={`${formatWalletAddress(address, 10)}`} className='py-2 px-6' onClick={() => handleDisconnectWallet()}/>
       </div> */}
-      <Button type='button' ariaLabel='Click to disconnect wallet' color='primary' text={`${formatWalletAddress(address, 10)}`} className='py-2 px-6 hover:cursor-pointer' onClick={() => handleDisconnectWallet()} />
+      <Button type='button' ariaLabel='Click to disconnect wallet' color='primary-gradient' text={`${formatWalletAddress(address, 10)}`} className='py-2 px-6 hover:cursor-pointer' onClick={() => handleDisconnectWallet()} />
 
     </div>
   );
