@@ -6,7 +6,9 @@ import {ethers} from 'ethers';
 export const NFT_MINT_DATE = new Date(process.env.REACT_APP_NFT_MINT_DATE || '').getTime();
 export const ETHEREUM_CHAIN_ID = 1;
 export const ROPSTEN_CHAIN_ID = 3;
-export const LOCALHOST_CHAIN_ID = 31337;
+// export const LOCALHOST_CHAIN_ID = 31337;
+export const LOCALHOST_CHAIN_ID = 3;
+
 /*
     if developing locally, let the contract address equal the address generated in the <NFT>.json file...
     otherwise our production address

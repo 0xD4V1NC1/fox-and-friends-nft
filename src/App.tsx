@@ -35,7 +35,10 @@ const App = () => {
       <GlobalContext.Provider value={{pageTitle, setPageTitle, metaDescription, setMetaDescription, account}}>
         <NftOwnerContextProvider>
           <ToastProvider>
-            <div className="app font-concertOne">
+            <div className="app font-concertOne" style={{backgroundImage: `url("/forest.jpg")`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', width: '100vw', backgroundAttachment: 'fixed',
+
+
+            }}>
               <AppRoutes/>
             </div>
           </ToastProvider>
