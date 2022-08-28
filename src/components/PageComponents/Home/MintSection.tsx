@@ -88,8 +88,8 @@ const MintSection = ({
             Frenzy Fox Club
           </h2>
           <Image
-            src="/preview.gif"
-            size="w-full h-full md:w-72 md:h-72"
+            src="/fox.png"
+            size="w-full h-full md:w-80 md:h-96"
             marginBottom="mb-0"
             className="rounded-3xl"
           />
