@@ -26,7 +26,7 @@ pragma solidity >=0.8.0 <0.9.0;
 
 /// @title Frenzy Fox Club Smart Contract
 /// @author
-contract FoxAndFriends is ERC721Enumerable, Ownable, ReentrancyGuard {
+contract FrenzyFoxClub is ERC721Enumerable, Ownable, ReentrancyGuard {
     using Strings for uint256;
 
     string public baseURI;
@@ -34,12 +34,9 @@ contract FoxAndFriends is ERC721Enumerable, Ownable, ReentrancyGuard {
     uint256 public cost;
     uint256 public maxSupply;
     uint256 public maxMintAmount;
-    uint256 public timeDeployed;
-    uint256 public allowMintingAfter = 0;
     bool public isPaused = false;
     // we do not want to reveal the nft yet so we initialize it to false
-    bool public isRevealed = false;
-    string public notRevealedUri;
+    bool public isRevealed = true;
 
     mapping(address => uint256) private _userNumOfMints;
 
@@ -49,21 +46,14 @@ contract FoxAndFriends is ERC721Enumerable, Ownable, ReentrancyGuard {
         uint256 _cost,
         uint256 _maxSupply,
         uint256 _maxMintAmount,
-        uint256 _allowMintingOn,
-        string memory _initBaseURI,
-        string memory _initNotRevealedUri
+        string memory _initBaseURI
     ) ERC721(_name, _symbol) {
-        if (_allowMintingOn > block.timestamp) {
-            allowMintingAfter = _allowMintingOn - block.timestamp;
-        }
 
         cost = _cost;
         maxSupply = _maxSupply;
         maxMintAmount = _maxMintAmount;
-        timeDeployed = block.timestamp;
 
         setBaseURI(_initBaseURI);
-        setNotRevealedURI(_initNotRevealedUri);
     }
 
     /// internal
@@ -74,10 +64,6 @@ contract FoxAndFriends is ERC721Enumerable, Ownable, ReentrancyGuard {
     // public
     function mint(uint256 _mintAmount) public payable nonReentrant {
         address sender = msg.sender;
-        require(
-            block.timestamp >= timeDeployed + allowMintingAfter,
-            "Minting not allowed yet"
-        );
 
         require(_mintAmount <= maxMintAmount - _userNumOfMints[sender], "Insufficient Mints Left");
 
@@ -129,10 +115,6 @@ contract FoxAndFriends is ERC721Enumerable, Ownable, ReentrancyGuard {
             "URI query for nonexistent token"
         );
 
-        if (isRevealed == false) {
-            return notRevealedUri;
-        }
-
         string memory currentBaseURI = _baseURI();
         return
             bytes(currentBaseURI).length > 0
@@ -146,29 +128,13 @@ contract FoxAndFriends is ERC721Enumerable, Ownable, ReentrancyGuard {
                 : "";
     }
 
-    function getSecondsUntilMinting() public view returns (uint256) {
-        if (block.timestamp < timeDeployed + allowMintingAfter) {
-            return (timeDeployed + allowMintingAfter) - block.timestamp;
-        } else {
-            return 0;
-        }
-    }
-
     // Only Owner Functions
-    function setIsRevealed(bool _state) public onlyOwner {
-        isRevealed = _state;
-    }
-
     function setCost(uint256 _newCost) public onlyOwner {
         cost = _newCost;
     }
 
     function setmaxMintAmount(uint256 _newmaxMintAmount) public onlyOwner {
         maxMintAmount = _newmaxMintAmount;
-    }
-
-    function setNotRevealedURI(string memory _notRevealedURI) public onlyOwner {
-        notRevealedUri = _notRevealedURI;
     }
 
     function setBaseURI(string memory _newBaseURI) public onlyOwner {
@@ -188,6 +154,21 @@ contract FoxAndFriends is ERC721Enumerable, Ownable, ReentrancyGuard {
 
     function withdraw() public payable onlyOwner {
         payable(msg.sender).transfer(address(this).balance);
-
     }
+    /*
+        @TODO
+        function payOut() private payable onlyOwner {
+            // pay 96% to addr1
+            // pay 3% to addr2
+            // pay 1% to add3
+            addr1Payout = address(this).balance * .96;
+            addr2Payout = address(this).balance * .03;
+            addr3Payout = address(this).balance * .01;
+            payable(addr1).transfer(addr1Payout)
+            payable(addr2).transfer(addr2Payout)
+            payable(addr3).transfer(addr3Payout)
+
+
+        }
+     */
 }

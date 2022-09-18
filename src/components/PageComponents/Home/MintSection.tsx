@@ -9,7 +9,7 @@ import Image from '../../UI/Image';
 // import {NFT_MINT_DATE} from '../../../consts/consts';
 
 import {handleMint} from '../../../utils/mintUtil';
-import {pluralize} from '../../../utils/formatUtil';
+// import {pluralize} from '../../../utils/formatUtil';
 import {useToastContext} from '../../../providers/ToastContext';
 
 const MintSection = ({
@@ -71,11 +71,10 @@ const MintSection = ({
     }
   };
 
-  const disabledProp = countdownCompleted && availableMints > 0? null : {disabled: true};
   const decrementAriaLabel = mintAmount > 0 ? mintAmount - 1 : 0;
   const totalCost = (nftCost * mintAmount);
   const formattedTotalCost = totalCost.toFixed(2);
-  const mintTextColor = availableMints > 0 ? 'text-black dark:text-white' : 'text-red-500';
+  // const mintTextColor = availableMints > 0 ? 'text-black dark:text-white' : 'text-red-500';
   return (
     <section
       id="mint-section"
@@ -125,7 +124,6 @@ const MintSection = ({
                   color="primary-gradient"
                   className="font-semibold px-[5.5rem] py-4"
                   text="MINT"
-                  {...disabledProp}
                   onClick={() => {
                     setIsMinting(true);
                     handleMint(mintAmount, provider, nftCost, addToast);
@@ -133,7 +131,7 @@ const MintSection = ({
                   }}
                   loading={isMinting}
                 />
-                <p className={`${mintTextColor} pt-4`}> You have {availableMints} {pluralize(availableMints, 'mint')} left</p>
+                {/* <p className={`${mintTextColor} pt-4`}> You have {availableMints} {pluralize(availableMints, 'mint')} left</p> */}
               </div>
             ) : (
               <div className="h-36 md:h-48 flex justify-center items-center text-center">

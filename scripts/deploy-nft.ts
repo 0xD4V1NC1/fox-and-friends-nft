@@ -26,27 +26,25 @@ async function main() {
   // We get the contract to deploy
   console.log('Getting Contract...');
   console.log('------------------------------------------');
-  const FoxAndFriends = await ethers.getContractFactory('FoxAndFriends');
+  const FrenzyFoxClub = await ethers.getContractFactory('FrenzyFoxClub');
   console.log('Attempting to Deploy Contract...');
   console.log('------------------------------------------');
-  const foxandfriends = await FoxAndFriends.deploy(
+  const frenzyfoxclub = await FrenzyFoxClub.deploy(
       NAME,
       SYMBOL,
       MINT_COST,
       MAX_SUPPLY,
       MAX_MINT_AMOUNT,
-      NFT_MINT_DATE,
       IPFS_IMAGE_METADATA_URI,
-      IPFS_HIDDEN_IMAGE_METADATA_URI,
   );
 
-  await foxandfriends.deployed();
-  console.log('NFT Smart Contract deployed to: ', foxandfriends.address);
-  const foxandfriendsInterface = foxandfriends.interface.format('json');
+  await frenzyfoxclub.deployed();
+  console.log('NFT Smart Contract deployed to: ', frenzyfoxclub.address);
+  const frenzyfoxclubInterface = frenzyfoxclub.interface.format('json');
 
   const contractData = {
-    address: foxandfriends.address,
-    abi: foxandfriendsInterface,
+    address: frenzyfoxclub.address,
+    abi: frenzyfoxclubInterface,
   };
 
   // helps determine our projects directory
