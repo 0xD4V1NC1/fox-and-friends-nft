@@ -155,20 +155,4 @@ contract FrenzyFoxClub is ERC721Enumerable, Ownable, ReentrancyGuard {
     function withdraw() public payable onlyOwner {
         payable(msg.sender).transfer(address(this).balance);
     }
-    /*
-        @TODO
-        function payOut() private payable onlyOwner {
-            // pay 96% to addr1
-            // pay 3% to addr2
-            // pay 1% to add3
-            addr1Payout = address(this).balance * .96;
-            addr2Payout = address(this).balance * .03;
-            addr3Payout = address(this).balance * .01;
-            payable(addr1).transfer(addr1Payout)
-            payable(addr2).transfer(addr2Payout)
-            payable(addr3).transfer(addr3Payout)
-
-
-        }
-     */
 }
