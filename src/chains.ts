@@ -43,7 +43,7 @@ export const CHAINS: { [chainId: number]: BasicChainInformation | ExtendedChainI
     name: 'Rinkeby',
   },
   5: { // Gorli
-    urls: [`https://goerli.infura.io/v3/`].filter(
+    urls: [`${process.env.REACT_APP_GOERLI_URL}`].filter(
         (url) => url !== undefined,
     ),
     name: 'Görli',

@@ -46,6 +46,10 @@ const config: HardhatUserConfig = {
       url: process.env.REACT_APP_ROPSTEN_URL || '',
       accounts: process.env.REACT_APP_PRIVATE_KEY !== undefined ? [process.env.REACT_APP_PRIVATE_KEY] : [],
     },
+    goerli: {
+      url: process.env.REACT_APP_GOERLI_URL || '',
+      accounts: process.env.REACT_APP_PRIVATE_KEY !== undefined ? [process.env.REACT_APP_PRIVATE_KEY] : [],
+    },
     ethereum: {
       url: process.env.REACT_APP_ETHEREUM_URL || '',
       accounts: process.env.REACT_APP_PRIVATE_KEY !== undefined ? [process.env.REACT_APP_PRIVATE_KEY] : [],
@@ -56,7 +60,7 @@ const config: HardhatUserConfig = {
     currency: 'USD',
   },
   etherscan: {
-    apiKey: process.env.REACT_APP_POLYSCAN_API_KEY,
+    apiKey: process.env.REACT_APP_ETHERSCAN_API_KEY,
   },
 };
 

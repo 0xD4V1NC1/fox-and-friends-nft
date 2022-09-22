@@ -14,7 +14,7 @@ const Footer = () => {
   // const {openseaURL} = useOpenSeaURL();
 
   return (
-    <footer className='bottom-0 w-full py-4 px-20 bg-white dark:bg-primary-dark-500 text-black dark:text-white'>
+    <footer className='bottom-0 w-full py-4 px-20 text-black dark:text-white'>
 
       <div className='mt-8 text-center text-gray-600 dark:text-gray-400 text-xs'>© Frenzy Fox Club All rights reserved</div>
     </footer>

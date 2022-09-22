@@ -14,7 +14,7 @@ const getSpinners = (themeColors) => {
 };
 
 module.exports = {
-  darkMode: 'class',
+  // darkMode: 'class',
   // you can use https://tailwind.ink/code to help come up with pallette colors
   theme: {
     extend: {

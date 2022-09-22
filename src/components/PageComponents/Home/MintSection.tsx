@@ -9,7 +9,7 @@ import Image from '../../UI/Image';
 // import {NFT_MINT_DATE} from '../../../consts/consts';
 
 import {handleMint} from '../../../utils/mintUtil';
-import {pluralize} from '../../../utils/formatUtil';
+// import {pluralize} from '../../../utils/formatUtil';
 import {useToastContext} from '../../../providers/ToastContext';
 
 const MintSection = ({
@@ -71,16 +71,15 @@ const MintSection = ({
     }
   };
 
-  const disabledProp = countdownCompleted && availableMints > 0? null : {disabled: true};
   const decrementAriaLabel = mintAmount > 0 ? mintAmount - 1 : 0;
   const totalCost = (nftCost * mintAmount);
   const formattedTotalCost = totalCost.toFixed(2);
-  const mintTextColor = availableMints > 0 ? 'text-black dark:text-white' : 'text-red-500';
+  // const mintTextColor = availableMints > 0 ? 'text-black dark:text-white' : 'text-red-500';
   return (
     <section
       id="mint-section"
       ref={mintSectionRef}
-      className="min-h-screen bg-white dark:bg-primary-dark-500 px-16 py-8 m-auto scroll-mt-8"
+      className="min-h-screen px-16 py-8 m-auto scroll-mt-8"
     >
       <div className="flex flex-col justify-center md:flex-row md:items-end sm:gap-24 lg:gap-36 w-full">
         <div className="flex flex-col">
@@ -103,14 +102,7 @@ const MintSection = ({
               <div className="h-48 flex flex-col justify-center items-center">
                 <h3 className='mb-4 text-2xl font-semibold'>Mint Cost: {formattedTotalCost} Ξ</h3>
                 <div className="flex justify-center items-center pb-4">
-                  <Button
-                    type="button"
-                    color="primary-gradient"
-                    className="px-6 py-4 mr-4"
-                    ariaLabel={`Click to Decrement to ${decrementAriaLabel} NFTs`}
-                    text="-"
-                    onClick={handleDecrement}
-                  />
+                  <button className='pr-4 text-5xl hover:text-primary-500' onClick={()=> handleDecrement()} aria-label={`Click to Decrement to ${decrementAriaLabel} NFTs`}>-</button>
                   <input
                     type="number"
                     className={`mb-0 box-content border-none text-black text-center p-4 w-1/2`}
@@ -123,14 +115,8 @@ const MintSection = ({
                     value={mintAmount}
                     aria-required
                   />
-                  <Button
-                    type="button"
-                    color="primary-gradient"
-                    className="px-6 py-4 ml-4"
-                    ariaLabel={`Click to Increment to ${mintAmount + 1} NFTs`}
-                    text="+"
-                    onClick={handleIncrement}
-                  />
+                  <button className='pl-4 text-5xl hover:text-primary-500' onClick={()=> handleIncrement()} aria-label={`Click to Increment to ${mintAmount + 1} NFTs`}>+</button>
+
                 </div>
                 <Button
                   type="button"
@@ -138,7 +124,6 @@ const MintSection = ({
                   color="primary-gradient"
                   className="font-semibold px-[5.5rem] py-4"
                   text="MINT"
-                  {...disabledProp}
                   onClick={() => {
                     setIsMinting(true);
                     handleMint(mintAmount, provider, nftCost, addToast);
@@ -146,7 +131,7 @@ const MintSection = ({
                   }}
                   loading={isMinting}
                 />
-                <p className={`${mintTextColor} pt-4`}> You have {availableMints} {pluralize(availableMints, 'mint')} left</p>
+                {/* <p className={`${mintTextColor} pt-4`}> You have {availableMints} {pluralize(availableMints, 'mint')} left</p> */}
               </div>
             ) : (
               <div className="h-36 md:h-48 flex justify-center items-center text-center">

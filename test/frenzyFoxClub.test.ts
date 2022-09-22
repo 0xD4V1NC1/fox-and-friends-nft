@@ -1,7 +1,7 @@
 import {expect, assert} from 'chai';
 import {ethers} from 'hardhat';
 
-describe(`FoxAndFriends NFT Contract Functions:`, function() {
+describe(`FrenzyFoxClub NFT Contract Functions:`, function() {
   let NFT;
   let testNFT: any;
   let testNFT2: any; // deployed at a future date
@@ -14,25 +14,12 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
   let addr4: any;
 
   // deploy config variables
-  const NAME = process.env.PROJECT_NAME || ``;
+  const NAME = process.env.REACT_APP_PROJECT_NAME || ``;
   const SYMBOL = process.env.REACT_APP_PROJECT_SYMBOL || `NFT`;
   const MINT_COST = process.env.REACT_APP_MINT_COST || 0;
   const MAX_SUPPLY = process.env.REACT_APP_MAX_SUPPLY || 0;
   const MAX_MINT_AMOUNT = process.env.REACT_APP_MAX_MINT_AMOUNT || 1;
-  const NFT_MINT_DATE = new Date(process.env.REACT_APP_NFT_MINT_DATE || 0)
-      .getTime()
-      .toString()
-      .slice(0, 10);
-  const currentDate = new Date();
-  const minsInFuture = 30; // 3o mins in the future
-  const FUTURE_MINT_DATE = new Date(
-      currentDate.getTime() + minsInFuture * 60000,
-  )
-      .getTime()
-      .toString()
-      .slice(0, 10);
   const IPFS_IMAGE_METADATA_URI = `ipfs://${process.env.REACT_APP_IPFS_IMAGE_METADATA_CID}/`;
-  const IPFS_HIDDEN_IMAGE_METADATA_URI = `ipfs://${process.env.REACT_APP_IPFS_HIDDEN_IMAGE_METADATA_CID}/hidden.json`;
 
   // formatEther will convert our large number that is a string to actual ether price,
   // and parseFloat will convert the price to a number
@@ -40,7 +27,7 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
 
   before(async function() {
     /* Get the ContractFactory and Signers here*/
-    NFT = await ethers.getContractFactory(`FoxAndFriends`);
+    NFT = await ethers.getContractFactory(`FrenzyFoxClub`);
     [owner, addr1, addr2, addr3, addr4] = await ethers.getSigners();
     testNFT = await NFT.deploy(
         NAME,
@@ -48,9 +35,7 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
         MINT_COST,
         MAX_SUPPLY,
         MAX_MINT_AMOUNT,
-        NFT_MINT_DATE,
         IPFS_IMAGE_METADATA_URI,
-        IPFS_HIDDEN_IMAGE_METADATA_URI,
     );
 
     testNFT2 = await NFT.deploy(
@@ -59,9 +44,7 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
         MINT_COST,
         MAX_SUPPLY,
         MAX_MINT_AMOUNT,
-        FUTURE_MINT_DATE,
         IPFS_IMAGE_METADATA_URI,
-        IPFS_HIDDEN_IMAGE_METADATA_URI,
     );
     testNFT3 = await NFT.deploy(
         NAME,
@@ -69,9 +52,7 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
         MINT_COST,
         MAX_SUPPLY,
         MAX_MINT_AMOUNT,
-        NFT_MINT_DATE,
         IPFS_IMAGE_METADATA_URI,
-        IPFS_HIDDEN_IMAGE_METADATA_URI,
     );
     console.log(`-----------------------------------------------------------`);
     console.log(`\n - - Address Variables - - \n`);
@@ -90,14 +71,8 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
     console.log(`MINT_COST:`, MINT_COST);
     console.log(`MAX_SUPPLY:`, MAX_SUPPLY);
     console.log(`MAX_MINT_AMOUNT:`, MAX_MINT_AMOUNT);
-    console.log(`NFT_MINT_DATE:`, NFT_MINT_DATE);
     console.log(`IPFS_IMAGE_METADATA_URI:`, IPFS_IMAGE_METADATA_URI);
-    console.log(
-        `IPFS_HIDDEN_IMAGE_METADATA_URI: `,
-        IPFS_HIDDEN_IMAGE_METADATA_URI,
-    );
     console.log(`\n - - Other Test Variables - - \n`);
-    console.log(`FUTURE_MINT_DATE:`, FUTURE_MINT_DATE);
     console.log(`mintCost (as number)`, mintCost);
 
     console.log(
@@ -145,11 +120,6 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
       const result = await testNFT.owner();
       expect(result).to.equal(owner.address);
     });
-
-    it(`.timeDeployed() - Returns the time deployed`, async () => {
-      const result = await testNFT.timeDeployed();
-      expect(result > 0).to.be.true;
-    });
   });
 
   describe(`${SYMBOL} Public Functions`, function() {
@@ -178,40 +148,12 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
       expect(totalSupply).to.equal(2);
     });
 
-    it(`.getSecondsUntilMinting() -  Should Return seconds until minting is available`, async () => {
-      const buffer = 2;
-      const result = await testNFT2.getSecondsUntilMinting();
-      const secondsTillMinting = Number(result);
-
-      // getting most recent block timestamp
-      const blockNum = await ethers.provider.getBlockNumber();
-      const block = await ethers.provider.getBlock(blockNum);
-      const timestamp = block.timestamp;
-
-      const target = parseFloat(FUTURE_MINT_DATE) - timestamp;
-
-      // NOTE: Sometimes the seconds may be off by 1, As long as the seconds are
-      // between the buffer zone, we'll pass the test
-      if (
-        secondsTillMinting > target - buffer &&
-        secondsTillMinting <= target
-      ) {
-        assert.isTrue(true);
-      } else {
-        assert.isTrue(false);
-      }
-      expect(secondsTillMinting).to.be.greaterThan(0);
-    });
-
     it(`.tokenURI(int tokenId) - Should return the tokens uri as string: `, async () => {
       const result = await testNFT.tokenURI(1);
       const isRevealed = await testNFT.isRevealed();
       if (isRevealed) {
         // if there is no hidden meta-image
         expect(result).to.equal(`${IPFS_IMAGE_METADATA_URI}1.json`);
-      } else {
-        // if there is no hidden meta-image
-        expect(result).to.equal(`${IPFS_HIDDEN_IMAGE_METADATA_URI}`);
       }
     });
   });
@@ -222,13 +164,6 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
       await testNFT.setBaseURI(newBaseURI, {from: owner.address});
       const result = await testNFT.baseURI();
       expect(result).to.equal(newBaseURI);
-    });
-
-    it(`.setNotRevealedURI(string newNotRevealedURI) - change the URI for the not revealed json`, async () => {
-      const newNotRevealedURI = `example.com`;
-      await testNFT.setNotRevealedURI(newNotRevealedURI);
-      const result = await testNFT.notRevealedUri();
-      expect(result).to.equal(newNotRevealedURI);
     });
 
     it(`.setmaxMintAmount(int newMaxMintAmount) - update the max mint amount`, async () => {
@@ -259,14 +194,6 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
       });
       // expect minting to fail b/c its paused...
       await expect(attemptMint).to.be.reverted;
-    });
-
-    it(`.setIsRevealed(boolean newState) - Change the isRevealed state`, async () => {
-      // isRevealed is initialized to false
-      const newRevealState = true;
-      await testNFT.setIsRevealed(newRevealState);
-      const result = await testNFT.isRevealed();
-      expect(result).to.be.true;
     });
 
     it(`.setBaseExtension(string newBaseExtension) - Sets the base extension`, async () => {
@@ -317,17 +244,6 @@ describe(`FoxAndFriends NFT Contract Functions:`, function() {
   });
 
   describe(`Should Fail Scenarios: `, async () => {
-    // should fail attempting to mint before mint date
-    it(`Should Fail: Mint before mint date`, async () => {
-      // attempt to mint 1 NFT
-      const result = testNFT2.connect(addr1).mint(1, {
-        value: ethers.utils.parseEther((mintCost * 1).toString()),
-      });
-
-      // we expect an error b/c it is before mint date
-      await expect(result).to.be.reverted;
-    });
-
     it(`Trying to mint more than max amount`, async () => {
       const maxMintAmount = Number(MAX_MINT_AMOUNT);
       const attemptedMintAmount = maxMintAmount + 1;
