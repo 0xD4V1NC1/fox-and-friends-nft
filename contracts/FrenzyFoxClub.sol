@@ -35,7 +35,7 @@ contract FrenzyFoxClub is ERC721Enumerable, Ownable, ReentrancyGuard {
     uint256 public maxSupply;
     uint256 public maxMintAmount;
     bool public isPaused = false;
-    // we do not want to reveal the nft yet so we initialize it to false
+    // we want nft revealed on Mint so we set it to true
     bool public isRevealed = true;
 
     mapping(address => uint256) private _userNumOfMints;
