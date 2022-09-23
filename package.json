@@ -8,13 +8,13 @@
   },
 
   "dependencies": {
-    "@coinbase/wallet-sdk": "^3.0.7",
+    "@coinbase/wallet-sdk": "^3.5.3",
     "@openzeppelin/contracts": "^4.7.0",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@tippyjs/react": "^4.2.6",
-    "@walletconnect/ethereum-provider": "^1.7.7",
+    "@walletconnect/ethereum-provider": "^1.8.0",
     "@web3-react/coinbase-wallet": "8.0.34-beta.0",
     "@web3-react/core": "8.0.35-beta.0",
     "@web3-react/gnosis-safe": "8.0.6-beta.0",
