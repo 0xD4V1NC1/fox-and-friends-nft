@@ -25,7 +25,7 @@ export const CHAINS: { [chainId: number]: BasicChainInformation | ExtendedChainI
     name: 'Localhost',
   },
   1: { // eth
-    urls: [`https://mainnet.infura.io/v3/`].filter((url) => url !== undefined),
+    urls: [`${process.env.REACT_APP_ETHEREUM_URL}`].filter((url) => url !== undefined),
     name: 'Mainnet',
     nativeCurrency: ETH,
     blockExplorerUrls: [''],
