@@ -7,7 +7,6 @@ export const NFT_MINT_DATE = new Date(process.env.REACT_APP_NFT_MINT_DATE || '')
 export const ETHEREUM_CHAIN_ID = 1;
 export const GOERLI_CHAIN_ID = 5;
 export const LOCALHOST_CHAIN_ID = 31337;
-// export const LOCALHOST_CHAIN_ID = 3;
 
 /*
     if developing locally, let the contract address equal the address generated in the <NFT>.json file...
