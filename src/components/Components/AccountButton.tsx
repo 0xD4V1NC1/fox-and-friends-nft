@@ -46,7 +46,7 @@ const AccountButton = () => (
           {(() => {
             if (!connected) {
               return (
-                <button onClick={openConnectModal} type="button" className="bg-rainbow py-2 px-4 rounded-full hover:cursor-pointer hover:bg-rainbow hover:animate-rainbow">
+                <button onClick={openConnectModal} type="button" className="bg-rainbow text-white py-2 px-4 rounded-full hover:cursor-pointer hover:bg-rainbow hover:animate-rainbow">
                   Connect Wallet
                 </button>
               );
@@ -60,7 +60,7 @@ const AccountButton = () => (
             }
             return (
               <div style={{display: 'flex', gap: 12}}>
-                <button onClick={openAccountModal} type="button" className="bg-primary-700 rounded-full py-2 px-4">
+                <button onClick={openAccountModal} type="button" className="text-white bg-primary-700 rounded-full py-2 px-4">
                   {account.displayName}
                   {account.displayBalance ?
                       ` (${account.displayBalance})` :
