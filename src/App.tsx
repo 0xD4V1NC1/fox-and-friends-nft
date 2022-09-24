@@ -9,9 +9,39 @@ import {Helmet} from 'react-helmet';
 // import Application Routes to App.js to keep file structure cleaner
 import AppRoutes from './AppRoutes';
 import {GlobalContext} from './providers/GlobalContext';
-import {NftOwnerContextProvider} from './providers/NftOwnerContext';
 import {ToastProvider} from './providers/ToastContext';
 import useCachedConnector from './hooks/useCachedConnector';
+
+import '@rainbow-me/rainbowkit/styles.css';
+import {
+  getDefaultWallets,
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
+import {
+  chain,
+  configureChains,
+  createClient,
+  WagmiConfig,
+} from 'wagmi';
+import {alchemyProvider} from 'wagmi/providers/alchemy';
+import {publicProvider} from 'wagmi/providers/public';
+
+const {chains, provider} = configureChains(
+    [chain.goerli],
+    [
+      alchemyProvider({apiKey: '0FGvbuc4wYTxfNi-gFDj4XGCOpGR2Wgn'}),
+      publicProvider(),
+    ],
+);
+const {connectors} = getDefaultWallets({
+  appName: 'My RainbowKit App',
+  chains,
+});
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
 
 const App = () => {
   const [pageTitle, setPageTitle]= useState<string>('');
@@ -33,16 +63,18 @@ const App = () => {
       </Helmet>
 
       <GlobalContext.Provider value={{pageTitle, setPageTitle, metaDescription, setMetaDescription, account}}>
-        <NftOwnerContextProvider>
-          <ToastProvider>
-            <div className="app font-concertOne" style={{backgroundImage: `url("/forest.jpg")`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', width: '100vw', backgroundAttachment: 'fixed',
+        <WagmiConfig client={wagmiClient}>
+          <RainbowKitProvider chains={chains}>
+            <ToastProvider>
+              <div className="app font-concertOne" style={{backgroundImage: `url("/forest.jpg")`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', width: '100vw', backgroundAttachment: 'fixed',
 
 
-            }}>
-              <AppRoutes/>
-            </div>
-          </ToastProvider>
-        </NftOwnerContextProvider>
+              }}>
+                <AppRoutes/>
+              </div>
+            </ToastProvider>
+          </RainbowKitProvider >
+        </WagmiConfig >
 
       </GlobalContext.Provider>
     </BrowserRouter>

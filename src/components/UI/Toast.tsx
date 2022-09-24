@@ -2,7 +2,7 @@ import React from 'react';
 import ToastInterface from '../../interfaces/ToastInterface';
 
 const getToastBodyStyles = (toastType: ToastInterface['toastType']) => {
-  let bodyStyles = 'items-center p-4 mb-4 w-full max-w-xs bg-white rounded-lg shadow border-2 ';
+  let bodyStyles = 'items-center p-4 mb-4 w-full max-w-xs bg-white rounded-lg shadow border-2 overflow-hidden ';
   switch (toastType) {
     case 'warning':
       bodyStyles += 'border-yellow-600 bg-yellow-200 text-yellow-600';

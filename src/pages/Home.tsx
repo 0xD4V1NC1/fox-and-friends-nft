@@ -1,25 +1,22 @@
 import React, {useEffect, useRef, useState} from 'react';
-
-import {useWeb3React} from '@web3-react/core';
+import {useAccount} from 'wagmi';
 
 import {useGlobalContext} from '../providers/GlobalContext';
-import useNftData from '../hooks/useNftData';
-
+import useNftWagmiData from '../hooks/useNftWagmiData';
 import Layout from '../components/Layout/Layout';
 import MintSection from '../components/PageComponents/Home/MintSection';
 import SoldOutSection from '../components/PageComponents/Home/SoldOutSection';
 import IntroSection from '../components/PageComponents/Home/IntroSection';
-import {useNftOwnerContext} from '../providers/NftOwnerContext';
+import {MAX_NFT_SUPPLY} from '../consts/consts';
 
 const Home = () => {
-  const {setPageTitle, setMetaDescription} = useGlobalContext();
-  const mintSectionRef = useRef<null | HTMLDivElement>(null);
-  const {isActive} = useWeb3React();
-
-  // had race condition b/c of signer not being initialized when useNFTData was called... but signer as dependency caused infinite loop...
-  const {nftCost, maxNftSupply, currentNftId, isNftDataLoading} = useNftData();
-  const {availableMints} = useNftOwnerContext();
   const [isSoldOut, setIsSoldOut] = useState(false);
+  const [availableMints, setAvailableMints] = useState(MAX_NFT_SUPPLY);
+  const mintSectionRef = useRef<null | HTMLDivElement>(null);
+
+  const {setPageTitle, setMetaDescription} = useGlobalContext();
+  const {address} = useAccount();
+  const {maxNftSupply, currentNftId, nftCost, isLoading: isNftDataLoading} = useNftWagmiData();
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -28,6 +25,7 @@ const Home = () => {
     if (!isNftDataLoading && currentNftId >= maxNftSupply) {
       setIsSoldOut(true);
     }
+    setAvailableMints(MAX_NFT_SUPPLY - currentNftId);
   }, [currentNftId]);
 
   const handleScrollToMintSection = () => {
@@ -37,11 +35,10 @@ const Home = () => {
       });
     }
   };
-
   return (
     <Layout>
       <IntroSection handleScrollToMintSection={handleScrollToMintSection} isSoldOut={isSoldOut} />
-      {isSoldOut ? <SoldOutSection /> : <MintSection mintSectionRef={mintSectionRef} nftCost={nftCost} isAccountConnected={isActive} maxAmount={maxNftSupply} currentNftId={currentNftId} availableMints={availableMints} />}
+      {isSoldOut ? <SoldOutSection /> : <MintSection mintSectionRef={mintSectionRef} nftCost={nftCost} isAccountConnected={!!address} maxAmount={maxNftSupply} currentNftId={currentNftId} availableMints={availableMints} />}
     </Layout>
   );
 };
