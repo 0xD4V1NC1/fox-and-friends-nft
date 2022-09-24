@@ -71,7 +71,7 @@ const MintSection = ({
   const totalCost = (nftCost * mintAmount);
   const formattedTotalCost = totalCost.toFixed(2);
 
-  const {config, error} = usePrepareContractWrite({
+  const {config} = usePrepareContractWrite({
     addressOrName: NFT_CONTRACT_ADDRESS,
     contractInterface: NFT_ABI,
     functionName: 'mint',
@@ -79,20 +79,16 @@ const MintSection = ({
       value: ethers.utils.parseEther((nftCost * mintAmount).toString()),
     }],
   });
-  const {data, isLoading, isSuccess, isError, write} = useContractWrite({
+  const {isLoading, write} = useContractWrite({
     ...config,
     onSuccess(data) {
       addToast({toastType: 'success', toastHeader: 'Mint Successful!', toastMessage: `Go to opensea to see your NFT`});
-      console.log('mint data', data);
     },
     onError(error) {
       addToast({toastType: 'error', toastHeader: 'Error Minting NFT', toastMessage: `Please make sure you have sufficient funds and are connected to the right network: ${error.message}`});
-      console.log('mint error', typeof error, error?.message);
     },
   });
   if (isLoadingBalance) return <Loading message="Loading..." />;
-  console.log('data, isLoading, isSuccess, isError', data, isLoading, isSuccess, isError);
-  console.log('error', error?.message);
   return (
     <section
       id="mint-section"
