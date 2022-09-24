@@ -6,18 +6,18 @@ import {NFT_CONTRACT_ADDRESS, NFT_ABI, MAX_NFT_SUPPLY, NFT_COST} from '../consts
 
 
 const convertCost = (data: any) => {
-  const costInWei = data[0]?.toString();
+  const costInWei = data && data[0]?.toString();
   // cost is returned as a bigNumber... to convert it we need to turn it into a string for formatEther then convert it to a number
   const costInEther = costInWei && parseFloat(ethers.utils.formatEther(costInWei));
   return costInEther;
 };
 
 const convertCurrentNftId = (data: any)=> {
-  return parseInt(data[1]?.toString());
+  return parseInt(data && data[1]?.toString());
 };
 
 const convertSupply = (data: any) => {
-  return data[2]?.toNumber();
+  return data && data[2]?.toNumber();
 };
 const FrenzyFoxContract = {
   addressOrName: NFT_CONTRACT_ADDRESS,
@@ -54,14 +54,14 @@ const useNftWagmiData = () => {
     ],
   });
   useEffect(() => {
-    const cost = convertCost(data);
-    setNftCost(cost || NFT_COST);
+    const cost = convertCost(data) || NFT_COST;
+    setNftCost(cost);
 
-    const currentId = convertCurrentNftId(data);
-    setCurrentNftId(currentId || 0);
+    const currentId = convertCurrentNftId(data) || 0;
+    setCurrentNftId(currentId);
 
-    const supply = convertSupply(data);
-    setMaxNftSupply(supply || MAX_NFT_SUPPLY);
+    const supply = convertSupply(data) || MAX_NFT_SUPPLY;
+    setMaxNftSupply(supply);
   }, [data]);
   return {maxNftSupply, currentNftId, nftCost, isLoading, isError};
 };
