@@ -1,6 +1,6 @@
 import React, {useState, RefObject, useEffect} from 'react';
 import {ethers} from 'ethers';
-import {useContractWrite, usePrepareContractWrite} from 'wagmi';
+import {useContractWrite, usePrepareContractWrite, useAccount, useBalance} from 'wagmi';
 
 import Button from '../../UI/Button';
 import Image from '../../UI/Image';
@@ -10,6 +10,7 @@ import Image from '../../UI/Image';
 
 import {useToastContext} from '../../../providers/ToastContext';
 import {NFT_ABI, NFT_CONTRACT_ADDRESS} from '../../../consts/consts';
+import Loading from '../../UI/Loading';
 
 
 const MintSection = ({
@@ -27,6 +28,10 @@ const MintSection = ({
   currentNftId: number;
   availableMints: number;
 }) => {
+  const {address} = useAccount();
+  const {data: balance, isLoading: isLoadingBalance} = useBalance({
+    addressOrName: address,
+  });
   const [mintAmount, setMintAmount] = useState<number>(1);
   const {addToast} = useToastContext();
 
@@ -85,7 +90,7 @@ const MintSection = ({
       console.log('mint error', typeof error, error?.message);
     },
   });
-
+  if (isLoadingBalance) return <Loading message="Loading..." />;
   console.log('data, isLoading, isSuccess, isError', data, isLoading, isSuccess, isError);
   console.log('error', error?.message);
   return (
@@ -114,6 +119,7 @@ const MintSection = ({
             {isAccountConnected ? (
               <div className="h-48 flex flex-col justify-center items-center">
                 <h3 className='mb-4 text-2xl font-semibold'>Mint Cost: {formattedTotalCost} Ξ</h3>
+                {parseFloat(balance?.formatted || '') < parseFloat(formattedTotalCost) ? <p className="text-red-700">Insufficient Funds</p>: null}
                 <div className="flex justify-center items-center pb-4">
                   <button className='pr-4 text-5xl hover:text-primary-500' onClick={()=> handleDecrement()} aria-label={`Click to Decrement to ${decrementAriaLabel} NFTs`}>-</button>
                   <input

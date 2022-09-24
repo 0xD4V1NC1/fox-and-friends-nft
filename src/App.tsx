@@ -26,10 +26,13 @@ import {
 import {alchemyProvider} from 'wagmi/providers/alchemy';
 import {publicProvider} from 'wagmi/providers/public';
 
+console.log('node env:', process.env.REACT_APP_NODE_ENV);
+console.log('api key: ', process.env.REACT_APP_NODE_ENV === 'production' ? process.env.REACT_APP_ETHEREUM_API_KEY : process.env.REACT_APP_NODE_ENV === 'test' ? process.env.REACT_APP_GOERLI_API_KEY: undefined);
 const {chains, provider} = configureChains(
-    [chain.goerli],
+    // if test use goerli, if production use ethereum, if other use hardhat
+    [process.env.REACT_APP_NODE_ENV==='test' ? chain.goerli : process.env.REACT_APP_NODE_ENV === 'production' ? chain.mainnet: chain.hardhat],
     [
-      alchemyProvider({apiKey: '0FGvbuc4wYTxfNi-gFDj4XGCOpGR2Wgn'}),
+      alchemyProvider({apiKey: process.env.REACT_APP_NODE_ENV === 'production' ? process.env.REACT_APP_ETHEREUM_API_KEY : process.env.REACT_APP_NODE_ENV === 'test' ? process.env.REACT_APP_GOERLI_API_KEY: undefined}),
       publicProvider(),
     ],
 );
