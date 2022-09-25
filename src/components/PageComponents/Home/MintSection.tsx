@@ -85,7 +85,7 @@ const MintSection = ({
       addToast({toastType: 'success', toastHeader: 'Mint Successful!', toastMessage: `Go to opensea to see your NFT`});
     },
     onError(error) {
-      addToast({toastType: 'error', toastHeader: 'Error Minting NFT', toastMessage: `Please make sure you have sufficient funds and are connected to the right network: ${error.message}`});
+      addToast({toastType: 'error', toastHeader: 'Error Minting NFT', toastMessage: `Please make sure you have sufficient funds and are connected to the right network`});
     },
   });
   if (isLoadingBalance) return <Loading message="Loading..." />;
