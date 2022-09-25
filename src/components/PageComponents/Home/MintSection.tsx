@@ -1,6 +1,6 @@
-import React, {useState, useLayoutEffect, useRef, RefObject, useEffect} from 'react';
-import Countdown from 'react-countdown';
-import {useWeb3React} from '@web3-react/core';
+import React, {useState, RefObject, useEffect} from 'react';
+import {ethers} from 'ethers';
+import {useContractWrite, usePrepareContractWrite, useAccount, useBalance} from 'wagmi';
 
 import Button from '../../UI/Button';
 import Image from '../../UI/Image';
@@ -8,9 +8,10 @@ import Image from '../../UI/Image';
 // use https://codechi.com/dev-tools/date-to-millisecond-calculators/ to calculate future date in milliseconds
 // import {NFT_MINT_DATE} from '../../../consts/consts';
 
-import {handleMint} from '../../../utils/mintUtil';
-// import {pluralize} from '../../../utils/formatUtil';
 import {useToastContext} from '../../../providers/ToastContext';
+import {NFT_ABI, NFT_CONTRACT_ADDRESS} from '../../../consts/consts';
+import Loading from '../../UI/Loading';
+
 
 const MintSection = ({
   mintSectionRef,
@@ -27,18 +28,13 @@ const MintSection = ({
   currentNftId: number;
   availableMints: number;
 }) => {
-  const [countdownCompleted, setCountdownCompleted] = useState<boolean>(false);
+  const {address} = useAccount();
+  const {data: balance, isLoading: isLoadingBalance} = useBalance({
+    addressOrName: address,
+  });
   const [mintAmount, setMintAmount] = useState<number>(1);
-  const countdownRef = useRef<Countdown>(null);
-  const [isMinting, setIsMinting] = useState<boolean>(false);
-  const {provider} = useWeb3React();
   const {addToast} = useToastContext();
 
-  // check dom before rendering to see if we should display completed countdown timer state
-  useLayoutEffect(() => {
-    const isCountdownCompleted = countdownRef.current?.api?.isCompleted();
-    if (isCountdownCompleted) setCountdownCompleted(true);
-  }, [countdownCompleted]);
 
   useEffect(() => {
     if (availableMints === 0) setMintAmount(0);
@@ -74,7 +70,25 @@ const MintSection = ({
   const decrementAriaLabel = mintAmount > 0 ? mintAmount - 1 : 0;
   const totalCost = (nftCost * mintAmount);
   const formattedTotalCost = totalCost.toFixed(2);
-  // const mintTextColor = availableMints > 0 ? 'text-black dark:text-white' : 'text-red-500';
+
+  const {config} = usePrepareContractWrite({
+    addressOrName: NFT_CONTRACT_ADDRESS,
+    contractInterface: NFT_ABI,
+    functionName: 'mint',
+    args: [mintAmount, {
+      value: ethers.utils.parseEther((nftCost * mintAmount).toString()),
+    }],
+  });
+  const {isLoading, write} = useContractWrite({
+    ...config,
+    onSuccess(data) {
+      addToast({toastType: 'success', toastHeader: 'Mint Successful!', toastMessage: `Go to opensea to see your NFT`});
+    },
+    onError(error) {
+      addToast({toastType: 'error', toastHeader: 'Error Minting NFT', toastMessage: `Please make sure you have sufficient funds and are connected to the right network`});
+    },
+  });
+  if (isLoadingBalance) return <Loading message="Loading..." />;
   return (
     <section
       id="mint-section"
@@ -101,6 +115,7 @@ const MintSection = ({
             {isAccountConnected ? (
               <div className="h-48 flex flex-col justify-center items-center">
                 <h3 className='mb-4 text-2xl font-semibold'>Mint Cost: {formattedTotalCost} Ξ</h3>
+                {parseFloat(balance?.formatted || '') < parseFloat(formattedTotalCost) ? <p className="text-red-700">Insufficient Funds</p>: null}
                 <div className="flex justify-center items-center pb-4">
                   <button className='pr-4 text-5xl hover:text-primary-500' onClick={()=> handleDecrement()} aria-label={`Click to Decrement to ${decrementAriaLabel} NFTs`}>-</button>
                   <input
@@ -124,15 +139,12 @@ const MintSection = ({
                   color="primary-gradient"
                   className="font-semibold px-[5.5rem] py-4"
                   text="MINT"
-                  onClick={() => {
-                    setIsMinting(true);
-                    handleMint(mintAmount, provider, nftCost, addToast);
-                    setIsMinting(false);
-                  }}
-                  loading={isMinting}
+                  onClick={() => write?.()}
+                  loading={isLoading}
                 />
-                {/* <p className={`${mintTextColor} pt-4`}> You have {availableMints} {pluralize(availableMints, 'mint')} left</p> */}
+                {/* <>{error?.message && addToast({toastType: 'error', toastHeader: 'Error', toastMessage: `Error: ${error.message}`})}</> */}
               </div>
+
             ) : (
               <div className="h-36 md:h-48 flex justify-center items-center text-center">
                 <h3 className="text-4xl font-semibold">
